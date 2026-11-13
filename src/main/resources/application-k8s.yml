@@ -1,0 +1,90 @@
+#######################################################################
+# k8s 개발환경 전용 프로파일 (DB 없이 기동 확인 + 클러스터 내 ES 연결)
+#  - src/main/resources/ 에 이 파일(application-k8s.yml)을 추가한 뒤 다시 빌드할 것.
+#  - 활성화: 환경변수 SPRING_PROFILES_ACTIVE=k8s
+#  - 특징:
+#     · DataSource/MyBatis 자동설정 제외 → MariaDB 없이도 기동됨
+#     · ENC(...) 미사용(전부 평문) → Jasypt 실제 복호화 안 일어남
+#       (단, JASYPT_ENCRYPTOR_PASSWORD / SECURITY_AES_KEY 환경변수는 여전히 필요:
+#        각각 JasyptAesConfig, SecurityModule 이 기동 시 존재/길이를 검증하기 때문)
+#     · Elasticsearch 는 클러스터 내 서비스로 접속(dev http)
+#######################################################################
+spring:
+  autoconfigure:
+    # DB 없이 기동하기 위해 DataSource/MyBatis 관련 자동설정 제외
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
+      - org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+
+server:
+  port: 8002
+  tomcat:
+    uri-encoding: UTF-8
+
+# jasypt 빈은 유지하되, 이 프로파일엔 ENC() 값이 없으므로 실제 복호화는 없음
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+
+mybatis:
+  mapper-locations: /mapper/**/*.xml
+
+log:
+  path: ./logs
+  name: search
+
+#######################
+# Elasticsearch (클러스터 내 es, dev http)
+#######################
+elasticsearch:
+  # ECK Service: es-es-http.<namespace>:9200 (같은 search 네임스페이스면 짧게 es-es-http:9200 도 가능)
+  host: 'http://es-es-http.search:9200'
+
+#######################
+# Webclient (원본 값 유지, http라 TLS 우회 불필요)
+#######################
+webclient:
+  max-connections: 100
+  max-idle-time: 60
+  max-life-time: 60
+  pending-acquire-timeout: 5000
+  pending-acquire-maxCount: -1
+  evict-in-background: 30
+  metrics: false
+  connection-timeout: 10000
+  response-timeout: 15000
+  read-timeout: 15000
+  write-timeout: 15000
+  max-in-memory-size: 100
+  ssl:
+    trust-self-signed: true
+    # ES basic 인증이 필요하면 header-api-key 대신 아래에 맞는 인증 방식을 코드에 맞춰 설정.
+    # 현재 dev ES(http, TLS off)는 elastic:비번 Basic 인증. 코드가 header-api-key 를 쓰면
+    # ES 계정/키에 맞춰 값 조정 필요(아래 배포 노트 참고).
+    header-api-key: aGtxRWpaOEJEUm54Q045X2pCUUw6QmFSeG1vS1dUSU9vRjduX002N0ZYZw==
+
+#######################
+# Search API (원본 유지)
+#######################
+raysearch:
+  license: VWtGWkxsTmxZWEpqYUNBeU1ESTJNRFl4T1MxU0xsTXRNREF5SU95YXNPdW1yT3lkZ08yV2lTRHFzSnpyc0p3Z01rTnZjbVZ6S2pFag==
+
+search:
+  menu-synonym-index: idx_88_menus_syno
+  integrated-preview-size: 3
+  product-info:
+    prdname: RAY.Search V2025.08
+    name: RAY.Search.API
+    version: "2025.08"
+    buildtime: "2025-08-11T05:20:42Z"
+    timezone: Asia/Seoul
+  api-key:
+    - 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+  allow-ip:
+    use: N
+    ip:
+      - 192.168.10.106

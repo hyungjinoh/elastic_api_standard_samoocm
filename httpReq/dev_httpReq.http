@@ -1,0 +1,122 @@
+
+
+
+### 자동완성 요청
+POST http://192.168.3.210:8002/api/auto
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "배관",
+  "collapseCd": "90009",
+  "sort": "10",
+  "size": 0,
+  "page": 0
+}
+
+### 색인 생성(없으면)
+POST http://192.168.3.210:8002/api/index/init
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+
+### 인덱스 재생성
+POST http://192.168.3.210:8002/api/index/recreate
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+
+
+###  샘플데이터 재생성.
+POST http://192.168.3.210:8002/api/index/sample
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+
+
+###
+###
+POST http://192.168.3.210:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "배치도",
+  "kwdOption": "",
+  "srchArea": [],
+  "reSrchYn": "",
+  "prevKwd": [],
+  "collapseCd": "90000",
+  "sort": "",
+  "regDtmYn": "",
+  "regStartDtm": "",
+  "regEndDtm": "",
+  "attachedType": [],
+  "size": 10,
+  "page": 1
+}
+
+### 프로젝트탭 검색
+POST http://192.168.3.210:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "공사",
+  "srchArea": [
+    "AREA01"
+  ],
+  "reSrchYn": "N",
+  "collapseCd": "90001",
+  "sort": "10",
+  "regDtmYn": "N",
+  "size": 20,
+  "page": 1,
+  "filterOption": {
+    "area": [
+      "PROJECT"
+    ],
+    "docType": {
+      "operator": "or",
+      "values": [
+        "FILE"
+      ]
+    },
+    "region": {
+      "operator": "or",
+      "values": [
+        "전라북도"
+      ]
+    }
+  }
+}
+
+
+### 프로젝트탭 검색
+POST http://192.168.3.210:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "공사",
+  "srchArea": [
+    "AREA01"
+  ],
+  "reSrchYn": "N",
+  "collapseCd": "90001",
+  "sort": "10",
+  "regDtmYn": "N",
+  "size": 20,
+  "page": 1,
+  "filterOption": {
+    "area": [
+      "PROJECT"
+    ],
+    "docType": {
+      "operator": "or",
+      "values": [
+        "FILE"
+      ]
+    }
+  }
+}

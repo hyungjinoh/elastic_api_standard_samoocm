@@ -1,0 +1,96 @@
+pipeline {
+    agent any
+
+    environment {
+        // 배포용 SSH 정보
+        IDENTITY_FILE = 'C:/Users/mkk23/.ssh/id_ed25519'
+        KNOWN_HOSTS   = 'C:/Users/mkk23/.ssh/known_hosts'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo "Checking out project from SVN..."
+                checkout([$class: 'SubversionSCM',
+                          locations: [[
+                                              credentialsId: 'mkk232',
+                                              remote: 'https://122.199.202.108:80/svn/search/trunk/elastic_api_standard',
+                                              local: '.' // workspace 바로 아래 체크아웃
+                                      ]]])
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building project with Maven..."
+                bat 'mvn clean package -f pom.xml -Dmaven.test.skip=true'
+            }
+        }
+
+        stage('Deploy to Multiple Servers') {
+            steps {
+                script {
+                    // 서버별 접속 정보 정의 (credentialsId + user 포함)
+                    def servers = [
+                        [ name: '101_host1', host: '122.199.202.101', port: 22, user: 'kevin', credentialsId: 'kevin', deployPath: '/data/rayful/search_api'],
+                        [ name: '101_host2', host: '122.199.202.101', port: 222, user: 'kevin', credentialsId: 'kevin', deployPath: '/data/rayful/search_api' ],
+                    ]
+
+                    for (srv in servers) {
+                        echo "Deploying to ${srv.name} (${srv.host})..."
+
+                        sshPut remote: [
+                            name: srv.name,
+                            host: srv.host,
+                            user: srv.user,
+                            port: srv.port,
+                            allowAnyHosts: true,
+                            credentialsId: srv.credentialsId,
+                            identityFile: "${IDENTITY_FILE}",
+                            knownHosts: "${KNOWN_HOSTS}"
+                        ],
+                        from: 'target/search_api/config/',
+                        into: "${srv.deployPath}/source"
+
+                        sshPut remote: [
+                            name: srv.name,
+                            host: srv.host,
+                            user: srv.user,
+                            port: srv.port,
+                            allowAnyHosts: true,
+                            credentialsId: srv.credentialsId,
+                            identityFile: "${IDENTITY_FILE}",
+                            knownHosts: "${KNOWN_HOSTS}"
+                        ],
+                        from: 'target/search_api/elastic_api_standard.war',
+                        into: "${srv.deployPath}/source"
+
+                        sshCommand remote: [
+                            name: srv.name,
+                            host: srv.host,
+                            user: srv.user,
+                            port: srv.port,
+                            allowAnyHosts: true,
+                            credentialsId: srv.credentialsId,
+                            identityFile: "${IDENTITY_FILE}",
+                            knownHosts: "${KNOWN_HOSTS}"
+                        ],
+                        command: """
+                            cd "${srv.deployPath}"
+                            ./restart.sh
+                        """
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Deployment completed successfully on all servers!"
+        }
+        failure {
+            echo "Deployment failed. Check logs for details."
+        }
+    }
+}

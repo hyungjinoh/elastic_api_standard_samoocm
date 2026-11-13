@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  [배치 위치 변경] /mapper/ecm/ 가 아니라 /ecm-mapper/ 에 둔다.
+  application-local.yml 의 mybatis.mapper-locations: /mapper/**/*.xml 은 기본(1차) SqlSessionFactory가
+  isearch 데이터소스에 붙여서 읽는 경로다. 이 매퍼는 완전히 다른 서버(samwoocm)를 바라보는 2차
+  SqlSessionFactory(EcmDataSourceConfig 참고)가 classpath:ecm-mapper/*.xml 로 따로 읽는다 —
+  /mapper/** 글롭에 걸리지 않도록 폴더 자체를 분리해 둔 것이다.
+-->
+<mapper namespace="com.rayful.elastic.api.loader.ecm.IEcmFolderDao">
+
+    <resultMap id="EcmFolderResultMap" type="com.rayful.elastic.api.loader.ecm.EcmFolderVO">
+        <id column="FOLDER_ID" property="folderId"/>
+        <result column="PARENT_ID" property="parentId"/>
+        <result column="FOLDER_NAME" property="folderName"/>
+        <result column="SORT_ORDER" property="sortOrder"/>
+    </resultMap>
+
+    <select id="selectAllFolders" resultMap="EcmFolderResultMap">
+        <![CDATA[
+        SELECT
+            FOLDER_ID,
+            PARENT_ID,
+            FOLDER_NAME,
+            SORT_ORDER
+        FROM
+            TB_ECM_FOLDER
+        ORDER BY
+            PARENT_ID IS NULL DESC,
+            PARENT_ID,
+            SORT_ORDER
+        ]]>
+    </select>
+
+</mapper>

@@ -1,0 +1,97 @@
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 0
+    },
+    "analysis": {
+      "normalizer": {
+        "lc_normalizer": {
+          "type": "custom",
+          "filter": ["lowercase"]
+        }
+      },
+      "tokenizer": {
+        "ko_tokenizer_search": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "none"
+        }
+      },
+      "filter": {
+        "ko_pos": { "type": "nori_part_of_speech" },
+        "ko_readingform": { "type": "nori_readingform" },
+        "autocomplete_edge": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "project_index": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer_search",
+          "filter": ["ko_pos", "ko_readingform", "lowercase"]
+        },
+        "project_autocomplete_index": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer_search",
+          "filter": ["lowercase", "autocomplete_edge"]
+        },
+        "project_autocomplete_search": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer_search",
+          "filter": ["lowercase"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "projectNo": {
+        "type": "keyword",
+        "normalizer": "lc_normalizer"
+      },
+      "projectName": {
+        "type": "text",
+        "analyzer": "project_index",
+        "fields": {
+          "keyword": { "type": "keyword", "ignore_above": 512 },
+          "autocomplete": {
+            "type": "text",
+            "analyzer": "project_autocomplete_index",
+            "search_analyzer": "project_autocomplete_search"
+          }
+        }
+      },
+      "clientName": {
+        "type": "text",
+        "analyzer": "project_index",
+        "fields": {
+          "keyword": { "type": "keyword", "ignore_above": 256 }
+        }
+      },
+      "projectStatus": {
+        "type": "keyword"
+      },
+      "region": {
+        "type": "keyword"
+      },
+      "constructionType": {
+        "type": "keyword"
+      },
+      "clientTypeCode": {
+        "type": "keyword"
+      },
+      "projectYear": {
+        "type": "integer"
+      },
+      "subordinate": {
+        "type": "boolean"
+      },
+      "regDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      }
+    }
+  }
+}

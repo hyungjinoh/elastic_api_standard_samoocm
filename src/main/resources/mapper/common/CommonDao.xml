@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.rayful.elastic.api.common.dao.ICommonDao">
+	<insert id="insertSearchLog" parameterType="map">
+        INSERT INTO TB_SRCH_LOG 
+            (APP_ID, SEC_ID, SRCH_DT, SRCH_KEYWORD, RES_COUNT, ELAPSE)
+        VALUES
+            (#{appId}, #{secId}, #{srchDt}, #{srchKeyword}, #{resCount}, #{elapse})
+    </insert>
+    
+    <select id="selectPopkeywordList" parameterType="map" resultType="map">
+	<![CDATA[
+		SELECT
+		    SRCH_KEYWORD as keyword,
+		    COUNT(*) as count
+		FROM
+		    TB_SRCH_LOG
+		WHERE
+		    APP_ID = #{appId}
+		    AND SRCH_DT >= NOW() - INTERVAL #{period} DAY
+		GROUP BY
+		    SRCH_KEYWORD
+		ORDER BY
+		    count DESC
+		LIMIT #{size}
+	]]>
+	</select>
+</mapper>

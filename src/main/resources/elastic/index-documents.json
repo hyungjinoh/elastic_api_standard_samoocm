@@ -1,0 +1,489 @@
+
+{
+  "settings": {
+    "index": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1,
+      "max_ngram_diff": 20
+    },
+    "analysis": {
+      "normalizer": {
+        "lc_normalizer": {
+          "type": "custom",
+          "filter": [
+            "lowercase"
+          ]
+        }
+      },
+      "tokenizer": {
+        "ko_tokenizer": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "mixed"
+        },
+        "ko_tokenizer_search": {
+          "type": "nori_tokenizer",
+          "decompound_mode": "none"
+        }
+      },
+      "filter": {
+        "ko_pos": {
+          "type": "nori_part_of_speech"
+        },
+        "ko_readingform": {
+          "type": "nori_readingform"
+        },
+        "ko_synonym": {
+          "type": "synonym_graph",
+          "synonyms": [
+            "배치도, 배치평면도, 배치 도면",
+            "감리보고서, 감리 보고서, 감리보고",
+            "안전, 세이프티, safety",
+            "환경부, 환경 부",
+            "신축공사, 신축 공사, 신축"
+          ],
+          "lenient": true
+        },
+        "autocomplete_edge": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "korean_index": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer",
+          "filter": [
+            "ko_pos",
+            "ko_readingform",
+            "lowercase"
+          ]
+        },
+        "korean_search": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer_search",
+          "filter": [
+            "ko_pos",
+            "ko_readingform",
+            "lowercase",
+            "ko_synonym"
+          ]
+        },
+        "autocomplete_index": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer",
+          "filter": [
+            "lowercase",
+            "autocomplete_edge"
+          ]
+        },
+        "autocomplete_search": {
+          "type": "custom",
+          "tokenizer": "ko_tokenizer",
+          "filter": [
+            "lowercase"
+          ]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "area": {
+        "type": "keyword"
+      },
+      "collapsedCd": {
+        "type": "keyword"
+      },
+      "docType": {
+        "type": "keyword"
+      },
+      "title": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 512
+          },
+          "autocomplete": {
+            "type": "text",
+            "analyzer": "autocomplete_index",
+            "search_analyzer": "autocomplete_search"
+          }
+        }
+      },
+      "content": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search"
+      },
+      "path": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 1024
+          }
+        }
+      },
+      "pathLv4": {
+        "type": "keyword",
+        "ignore_above": 512
+      },
+      "projectNo": {
+        "type": "keyword"
+      },
+      "projectName": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 512
+          }
+        }
+      },
+      "projectYear": {
+        "type": "integer"
+      },
+      "subordinate": {
+        "type": "boolean"
+      },
+      "region": {
+        "type": "keyword"
+      },
+      "constructionType": {
+        "type": "keyword"
+      },
+      "performer": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 128
+          }
+        }
+      },
+      "author": {
+        "type": "keyword"
+      },
+      "fileType": {
+        "type": "keyword",
+        "normalizer": "lc_normalizer"
+      },
+      "fileSize": {
+        "type": "long"
+      },
+      "downloadUrl": {
+        "type": "keyword",
+        "index": false
+      },
+      "regDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "modDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "contractStatus": {
+        "type": "keyword"
+      },
+      "standardFolder": {
+        "type": "keyword"
+      },
+      "securityLevel": {
+        "type": "keyword"
+      },
+      "deleted": {
+        "type": "boolean"
+      },
+      "progressStatus": {
+        "type": "keyword"
+      },
+      "businessField": {
+        "type": "keyword"
+      },
+      "siteOpened": {
+        "type": "keyword"
+      },
+      "workType": {
+        "type": "keyword"
+      },
+      "orderType": {
+        "type": "keyword"
+      },
+      "serviceType": {
+        "type": "keyword"
+      },
+      "jointType": {
+        "type": "keyword"
+      },
+      "internalParticipant": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "externalParticipant": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "constructionAction": {
+        "type": "keyword"
+      },
+      "contractDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "preTransferDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "transferDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "endDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "planApprovalDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "buildingPermitDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "startDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "useApprovalDate": {
+        "type": "date",
+        "format": "date_optional_time"
+      },
+      "budgetAmount": {
+        "type": "long"
+      },
+      "budgetPerPyeong": {
+        "type": "long"
+      },
+      "designPrice": {
+        "type": "long"
+      },
+      "designPricePerPyeong": {
+        "type": "long"
+      },
+      "constructionCostInitial": {
+        "type": "long"
+      },
+      "constructionCostInitialPerPyeong": {
+        "type": "long"
+      },
+      "constructionCostFinal": {
+        "type": "long"
+      },
+      "constructionCostFinalPerPyeong": {
+        "type": "long"
+      },
+      "facilityUseType": {
+        "type": "keyword"
+      },
+      "legalUseTypeLv1": {
+        "type": "keyword"
+      },
+      "legalUseTypeLv2": {
+        "type": "keyword"
+      },
+      "siteAreaSqm": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "siteAreaPyeong": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "buildingAreaSqm": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "buildingAreaPyeong": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "totalFloorAreaSqm": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "totalFloorAreaPyeong": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "floorsAboveGround": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "floorsBelowGround": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "householdsApartment": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "roomsOfficetel": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "roomsLodging": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "bedsHospital": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "dataCenterCapacityMw": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "designCondition": {
+        "type": "keyword"
+      },
+      "structureType": {
+        "type": "keyword"
+      },
+      "structureMaterial": {
+        "type": "keyword"
+      },
+      "workProcess": {
+        "type": "keyword"
+      },
+      "materialKeywords": {
+        "type": "text",
+        "analyzer": "korean_index",
+        "search_analyzer": "korean_search",
+        "fields": {
+          "keyword": {
+            "type": "keyword",
+            "ignore_above": 256
+          }
+        }
+      },
+      "mainDataType": {
+        "type": "keyword"
+      }
+    }
+  }
+}

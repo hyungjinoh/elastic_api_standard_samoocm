@@ -1,0 +1,541 @@
+#######################
+# Server
+#######################
+server:
+  port: 8002
+  tomcat:
+    uri-encoding: UTF-8
+#  ssl:
+#    enabled: true
+#    key-store: classpath:ssl/search.api.p12
+#    key-store-type: PKCS12
+#    # @search!
+#    key-store-password: ENC(0Whq7L+cSk3iL67TMoLaRIQPV4OuTqbs)
+
+#######################
+# license info
+#######################
+raysearch:
+  license: VWtGWkxsTmxZWEpqYUNBeU1ESTJNRFl4T1MxU0xsTXRNREF5SU95YXNPdW1yT3lkZ08yV2lTRHFzSnpyc0p3Z01rTnZjbVZ6S2pFag==#######################
+
+# Database
+#######################
+mybatis:
+  mapper-locations: /mapper/**/*.xml
+jasypt:
+  encryptor:
+    bean: jasyptEncryptorAES
+# [시큐어코딩 조치] Jasypt 암호화 강화(PBEWITHHMACSHA512ANDAES_256) + 키 환경변수화
+#  - 암호화 키는 환경변수 JASYPT_ENCRYPTOR_PASSWORD 로 주입해야 하며, 없으면 기동 실패함.
+#  - 알고리즘/키가 변경되었으므로 아래 모든 ENC(...) 값은 새 키로 재암호화하여 교체해야 함:
+#      export JASYPT_ENCRYPTOR_PASSWORD='운영관리 강력 비밀값'
+#      java -cp app.jar com.rayful.elastic.api.common.config.JasyptAesConfig '평문'
+#    → 출력값을 ENC(출력값) 형태로 교체. (username/password, key-store-password, allow-ip 등 전 프로파일 공통)
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher
+      
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.3.210:3306/isearch?allowPublicKeyRetrieval=true&useSSL=false
+    # JasyptAesConfig 의 stringEncryptor함수를 활용해 생성    --- root / fpdlvnf1!@
+#    username: ENC(65uVUyaOs5cil4VC+0mg8F0tzhkLsMUUN8PSENMLQFRgWRk1o3jt/XGY3tDGA0Yk)
+#    password: ENC(RgeixfiIw0L/CgJ8T0DM/IdFsRD7wzyOIIH4LIPgXDTvhLK3+Pt3W0zB/xsCvLO7)
+    username: rayful
+    password: rayful1!@
+
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 5
+      idle-timeout: 600000
+      connection-timeout: 10000
+      max-lifetime: 1800000
+      initialization-fail-timeout: -1
+      connection-test-query: SELECT 1
+      leak-detection-threshold: 5000   # 커넥션 누수 감지 (선택)
+      data-source-properties:
+        cachePrepStmts: true
+        prepStmtCacheSize: 250
+        prepStmtCacheSqlLimit: 2048
+        useServerPrepStmts: true
+    
+  task:
+    execution:
+      pool:
+        core-size: 20
+        max-size: 50
+        queue-capacity: 100
+        
+#######################
+# Logging
+#######################
+# 로그 경로/파일명 → logback-spring.xml 의 log.path / log.name 으로 매핑 (파일: <경로>/search.log)
+# 절대경로 예) D:/logs/search_api  (역슬래시 대신 슬래시 권장)
+log:
+  path: ./logs
+  name: search
+
+
+logging.level.com.rayful: debug
+
+#######################
+# ③ 폴더경로(ECM) 전용 DB — 완전히 다른 MariaDB 서버/호스트(samwoocm).
+# EcmDataSourceConfig 가 이 값을 읽어 spring.datasource(위 isearch) 와는 별개인
+# 2차 DataSource/SqlSessionFactory 를 만든다. 아래 호스트/계정은 예시이니 실제 samwoocm
+# 서버 정보로 반드시 바꿔서 쓸 것.
+#######################
+#datasource:
+#  samwoocm:
+#    driver-class-name: org.mariadb.jdbc.Driver
+#    url: jdbc:mariadb://122.199.202.101:3306/samwoocm?allowPublicKeyRetrieval=true&useSSL=false
+#    username: root
+#    password: pass123#
+
+datasource:
+  samwoocm:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/isearch?allowPublicKeyRetrieval=true&useSSL=false
+    username: isearch
+    password: isearch
+
+#######################
+# Elasticsearch
+#######################
+elasticsearch:
+  host: 'https://192.168.3.210:9200'
+  # ===== [wjg-loader 병합 — com.rayful.elastic.api.loader.config.ElasticsearchProperties] =====
+  # 위 host 는 표준 검색 플로우(WebClientHelper)와 공유한다 — 같은 ES 클러스터를 가리켜야 한다.
+  # 아래 3개는 공식 Elasticsearch Java 클라이언트(색인/적재 전용) 인증에만 쓰인다.
+  username: elastic
+  password: ${ES_PASSWORD:elastic}
+  trust-self-signed: true   # local 전용. dev/prod 는 정식 트러스트스토어(truststore-path) 권장.
+  # ============================================================================================
+
+#######################
+# Webclient
+#######################
+webclient:
+  max-connections: 100
+  max-idle-time: 60
+  max-life-time: 60
+  pending-acquire-timeout: 5000
+  pending-acquire-maxCount: -1
+  evict-in-background: 30
+  metrics: false
+  # 3000 -> 10000
+  connection-timeout: 10000
+  # 3000 -> 15000
+  response-timeout: 15000
+  # 3000 -> 15000
+  read-timeout: 15000
+  # 3000 -> 15000
+  write-timeout: 15000
+  max-in-memory-size: 100
+  ssl:
+    #key-store-path: ssl/elastic.jks
+    # @search!
+    #key-store-pwd: ENC(0Whq7L+cSk3iL67TMoLaRIQPV4OuTqbs)
+    # elastic:elastic
+    #header-id-pw: ENC(JlWuhVIe8FK+0FSTX36QMoCsrHB1756y)
+    # M0dhdks1Z0JkS3pybVdpWVVXSFY6MWpLQktydkxTdHFQN2dSQTF3WU9CQQ==
+    # [로컬 기동 수정] 위는 전부 주석 처리돼 있어서 표준 검색 플로우(WebClientHelper)가 ES에 인증 헤더를
+    # 아예 안 보내고 있었다 — 그래서 로컬 ES(보안 활성화됨)가 "anonymous access is not allowed"(401)로 거부.
+    # CommonServiceImpl 이 이 값을 "아이디:비밀번호" 평문으로 읽어서 자기가 직접 Base64 인코딩 해 Basic 인증
+    # 헤더로 보낸다(ENC(...) 로 감쌀 필요 없음 — 감싸려면 JASYPT_ENCRYPTOR_PASSWORD 로 새로 암호화해야 함).
+    # 아래는 로더(ElasticsearchConfig)가 이미 성공적으로 쓰고 있는 것과 동일한 elastic/ES_PASSWORD 계정 재사용.
+    header-id-pw: elastic:${ES_PASSWORD:elastic}
+    #    trust-self-signed: false            # 우회 안 씀 — 정식 검증 경로
+    trust-self-signed: true            # 우회 사용
+    # [버그 수정] CommonServiceImpl.search() 는 header-api-key 가 비어있지 않으면 무조건 그걸 우선
+    # 써버리고(ApiKey 인증), 바로 위에서 고친 header-id-pw(Basic 인증)는 아예 거들떠보지도 않는다.
+    # 여기 남아있던 값은 다른(원격) ES용 API Key 로, 이 로컬 ES에서는 유효하지 않아 401이 났다 —
+    # docker/docker-compose.yml 의 컨테이너 배포 쪽도 똑같은 이유로 이 값을 빈 문자열로 덮어쓰고 있다
+    # (WEBCLIENT_SSL_HEADER_API_KEY: ""). 로컬도 비워서 Basic 인증(elastic/elastic1234)으로 떨어지게 했다.
+    header-api-key: ''
+
+
+#######################
+# Search API
+#######################
+search:
+  # 통합검색 시 인덱스(섹션)당 미리보기 노출 개수 - UI가 "위에서 아래로 3개씩" 보여주는 구조에 맞춤
+  integrated-preview-size: 3
+  # Product Info
+  product-info:
+    prdname: RAY.Search V2025.08
+    name: RAY.Search.API
+    version: "2026.11"
+    buildtime: "2026-11-15T05:20:42Z"
+    #buildtime: "@maven.build.timestamp@"
+    timezone: Asia/Seoul
+  # API 키
+  # 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+  api-key: 
+#    - ENC(xkszGt5rWpSFNm0wl0Rq8qGnB5uw4OH0aLhjxXfGjYowPRzrD6eLDMBDFytbZlDMEMbnwgrBq3uRWWN2PGxz1PzhFUIArvECk3UcODUB1vo=)
+     - 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+  # 요청 허용 ip
+  allow-ip: 
+    use: N
+    ip: 
+      - 192.168.10.106
+  # 검색어의 DB Insert 여부 - DB가 제공되지 않는 사이트에서는 N 처리, N일 경우 spring.jpa.hibernate.ddl-auto: none 설정을 하도록 한다.  
+  dblog-use: N
+  # 사이트정보(현재 미사용)
+  site-info:
+    name: samoocm
+    code: DEFAULT
+  # 인덱스명 : 99999는 통합검색, 인덱스명은 아래 섹션명과 matching
+  index-name:
+    # ===== [우장각 통합검색 커스텀] =====
+    # wjg-backend 와 동일한 단일 인덱스(idx_wjg_documents)를 탭(area 필드)별로 여러 collapseCd 가 공유해서 바라보는 구조.
+    # 탭 구분은 filterOption.area 로 처리(StandardSearchController 의 99999 통합검색 메뉴병합 로직과 겹치지 않도록 99999 대신 90000 사용).
+    "90000": idx_wjg_documents1,idx_wjg_documents2,idx_wjg_documents3,idx_wjg_documents4   # 통합검색(ALL) - area 필터 없음
+    "90001": idx_wjg_documents1   # 프로젝트
+    "90002": idx_wjg_documents2   # 지식정보
+    "90003": idx_wjg_documents3   # 전사문서
+    "90004": idx_wjg_documents4   # 부서문서
+    "90009": idx_auto   # 자동완성
+  # 섹션코드 : 인덱스명 기준으로 섹션코드 지정(고정 코드값)
+  section-code:
+    idx_wjg_documents1: 90001
+    idx_wjg_documents2: 90002
+    idx_wjg_documents3: 90003
+    idx_wjg_documents4: 90004
+    idx_auto: 90009
+
+
+  # 섹션명 : 인덱스명 기준으로 섹션명 지정(사이트 별 수정 가능)
+  section-name:
+    idx_wjg_documents1: 프로젝트
+    idx_wjg_documents2: 지식정보
+    idx_wjg_documents3: 전사문서
+    idx_wjg_documents4: 부서문서
+    idx_auto: 자동완성
+  # 검색결과 리턴필드 : 인덱스명 기준(현재 기본필드만 지정, 사이트 별 수정 가능)
+  # attach_body 의 경우 사이즈가 너무 큰 이슈가 존재 하므로 _source로 제공하지 않고, 하이라이팅이 존재 할 경우 해당 정보만 리턴
+  includes:
+    idx_wjg_documents1: id,area,docType,title,content,path,projectNo,projectName,projectYear,subordinate,region,constructionType,performer,author,fileType,fileSize,downloadUrl,regDate,modDate,contractStatus,standardFolder,securityLevel,progressStatus,businessField,siteOpened,workType,orderType,serviceType,jointType,internalParticipant,externalParticipant,constructionAction,contractDate,preTransferDate,transferDate,endDate,planApprovalDate,buildingPermitDate,startDate,useApprovalDate,budgetAmount,budgetPerPyeong,designPrice,designPricePerPyeong,constructionCostInitial,constructionCostInitialPerPyeong,constructionCostFinal,constructionCostFinalPerPyeong,facilityUseType,legalUseTypeLv1,legalUseTypeLv2,siteAreaSqm,siteAreaPyeong,buildingAreaSqm,buildingAreaPyeong,totalFloorAreaSqm,totalFloorAreaPyeong,floorsAboveGround,floorsBelowGround,householdsApartment,roomsOfficetel,roomsLodging,bedsHospital,dataCenterCapacityMw,designCondition,structureType,structureMaterial,workProcess,materialKeywords,mainDataType
+    idx_wjg_documents2: id,area,docType,title,content,path,projectNo,projectName,projectYear,subordinate,region,constructionType,performer,author,fileType,fileSize,downloadUrl,regDate,modDate,contractStatus,standardFolder,securityLevel,progressStatus,businessField,siteOpened,workType,orderType,serviceType,jointType,internalParticipant,externalParticipant,constructionAction,contractDate,preTransferDate,transferDate,endDate,planApprovalDate,buildingPermitDate,startDate,useApprovalDate,budgetAmount,budgetPerPyeong,designPrice,designPricePerPyeong,constructionCostInitial,constructionCostInitialPerPyeong,constructionCostFinal,constructionCostFinalPerPyeong,facilityUseType,legalUseTypeLv1,legalUseTypeLv2,siteAreaSqm,siteAreaPyeong,buildingAreaSqm,buildingAreaPyeong,totalFloorAreaSqm,totalFloorAreaPyeong,floorsAboveGround,floorsBelowGround,householdsApartment,roomsOfficetel,roomsLodging,bedsHospital,dataCenterCapacityMw,designCondition,structureType,structureMaterial,workProcess,materialKeywords,mainDataType
+    idx_wjg_documents3: id,area,docType,title,content,path,projectNo,projectName,projectYear,subordinate,region,constructionType,performer,author,fileType,fileSize,downloadUrl,regDate,modDate,contractStatus,standardFolder,securityLevel,progressStatus,businessField,siteOpened,workType,orderType,serviceType,jointType,internalParticipant,externalParticipant,constructionAction,contractDate,preTransferDate,transferDate,endDate,planApprovalDate,buildingPermitDate,startDate,useApprovalDate,budgetAmount,budgetPerPyeong,designPrice,designPricePerPyeong,constructionCostInitial,constructionCostInitialPerPyeong,constructionCostFinal,constructionCostFinalPerPyeong,facilityUseType,legalUseTypeLv1,legalUseTypeLv2,siteAreaSqm,siteAreaPyeong,buildingAreaSqm,buildingAreaPyeong,totalFloorAreaSqm,totalFloorAreaPyeong,floorsAboveGround,floorsBelowGround,householdsApartment,roomsOfficetel,roomsLodging,bedsHospital,dataCenterCapacityMw,designCondition,structureType,structureMaterial,workProcess,materialKeywords,mainDataType
+    idx_wjg_documents4: id,area,docType,title,content,path,projectNo,projectName,projectYear,subordinate,region,constructionType,performer,author,fileType,fileSize,downloadUrl,regDate,modDate,contractStatus,standardFolder,securityLevel,progressStatus,businessField,siteOpened,workType,orderType,serviceType,jointType,internalParticipant,externalParticipant,constructionAction,contractDate,preTransferDate,transferDate,endDate,planApprovalDate,buildingPermitDate,startDate,useApprovalDate,budgetAmount,budgetPerPyeong,designPrice,designPricePerPyeong,constructionCostInitial,constructionCostInitialPerPyeong,constructionCostFinal,constructionCostFinalPerPyeong,facilityUseType,legalUseTypeLv1,legalUseTypeLv2,siteAreaSqm,siteAreaPyeong,buildingAreaSqm,buildingAreaPyeong,totalFloorAreaSqm,totalFloorAreaPyeong,floorsAboveGround,floorsBelowGround,householdsApartment,roomsOfficetel,roomsLodging,bedsHospital,dataCenterCapacityMw,designCondition,structureType,structureMaterial,workProcess,materialKeywords,mainDataType
+    idx_auto: word
+    # [우장각 커스텀] wjg-backend SearchDocument 필드 전체(26개 상세검색 필드 포함)
+#    idx_wjg_documents: id,area,docType,title,content,path,projectNo,projectName,projectYear,subordinate,region,constructionType,performer,author,fileType,fileSize,downloadUrl,regDate,modDate,contractStatus,standardFolder,securityLevel,progressStatus,businessField,siteOpened,workType,orderType,serviceType,jointType,internalParticipant,externalParticipant,constructionAction,contractDate,preTransferDate,transferDate,endDate,planApprovalDate,buildingPermitDate,startDate,useApprovalDate,budgetAmount,budgetPerPyeong,designPrice,designPricePerPyeong,constructionCostInitial,constructionCostInitialPerPyeong,constructionCostFinal,constructionCostFinalPerPyeong,facilityUseType,legalUseTypeLv1,legalUseTypeLv2,siteAreaSqm,siteAreaPyeong,buildingAreaSqm,buildingAreaPyeong,totalFloorAreaSqm,totalFloorAreaPyeong,floorsAboveGround,floorsBelowGround,householdsApartment,roomsOfficetel,roomsLodging,bedsHospital,dataCenterCapacityMw,designCondition,structureType,structureMaterial,workProcess,materialKeywords,mainDataType
+  # 검색 필드 : 인덱스명 기준(AREA01-전체, AREA02-제목, AREA03-본문, AREA04-첨부, AREA05-기안자(작성자), AREA06-완결자, 사이트 별 수정 가능)
+  fields:
+#    idx_wjg_documents1:
+#      AREA01: title,content,attach_info.attach_nm,attach_body,writer_nm,writer_nm.ngram,doc_number,category_cur
+#      AREA02: title
+#      AREA03: content
+#      AREA04: attach_info.attach_nm,attach_body
+#      AREA05: writer_nm,writer_nm.ngram
+#    idx_wjg_documents2:
+#      AREA01: title
+#      AREA02: title
+#      AREA03: title
+#      AREA04: title
+#      AREA05: title
+    # [우장각 커스텀] AREA01=전체, AREA02=파일명, AREA03=폴더명, AREA04=내용, AREA05=작성자
+    # (지식정보/전사문서/부서문서 공통 상세검색 모달의 "검색영역" 체크박스와 1:1 매칭)
+    idx_wjg_documents1:
+      AREA01: title,path,content,author,projectName,performer
+      AREA02: title
+      AREA03: path
+      AREA04: content
+      AREA05: author
+    idx_wjg_documents2:
+      AREA01: title,path,content,author,projectName,performer
+      AREA02: title
+      AREA03: path
+      AREA04: content
+      AREA05: author
+    idx_wjg_documents3:
+      AREA01: title,path,content,author,projectName,performer
+      AREA02: title
+      AREA03: path
+      AREA04: content
+      AREA05: author
+    idx_wjg_documents4:
+      AREA01: title,path,content,author,projectName,performer
+      AREA02: title
+      AREA03: path
+      AREA04: content
+      AREA05: author
+    idx_auto:
+      AREA01: word
+      AREA02: word
+      AREA03: word
+      AREA04: word
+      AREA05: word
+  # 하이라이트 필드 : 인덱스 기준으로 필드 지정, 지정된 필드에 한해 highlight-sub 옵션에서 활용될 수 있음. 
+  # "필드.ngram", "필드.cho" 같은 필드도 지정하면 검색엔진에 해당 명칭으로 리턴 되며, 소스레벨에서 "필드"로 replace 처리, 단 "필드"에 하이라이트 값이 있다면 무시처리 (ex. title.ngram)
+  # 배열구조 색인인 경우에도 지정하면 해당 명칭으로 리턴 되며, 소스레벨에서 배열구조 안에 replace 처리 (ex. attach_info.attach_nm)
+  highlight:
+#    idx_02_boards: title,content,attach_info.attach_nm,attach_body,writer_nm,writer_nm.ngram
+#    idx_08_menus: title
+    idx_wjg_documents1: title,content
+    idx_wjg_documents2: title,content
+    idx_wjg_documents3: title,content
+    idx_wjg_documents4: title,content
+    idx_auto: word
+  # 추가 하이라이트 필드 : 인덱스명 기준, 추가로 _highlight 가 붙은 결과를 제공한다.(다른 필드는 기존 필드명에 overwrite 된다.) 
+  # attach_body 의 경우 서브필드를 강제적으로 제공하도록 처리(includes에서 제거된 상태로 고정)
+  highlight-sub:
+#    idx_02_boards:
+#    idx_08_menus:
+    idx_auto: word
+    idx_wjg_documents1:
+    idx_wjg_documents2:
+    idx_wjg_documents3:
+    idx_wjg_documents4:
+  # 하이라이트 옵션
+  highlight-option:
+    pre_tags: <em>
+    post_tags: </em>
+    fragment_size: 300
+    number_of_fragments: 5
+  # 하이라이트 추가 필드 suffix 명칭
+  highlight-add-field: _highlight
+  # 정렬
+  sort:
+#    idx_02_boards:
+#      # 정확도 내림차순
+#      10: _score:DESC
+#      # 최신순 내림차순 - 해당 사이트는 등록일 기준(사이트 별 수정 가능)
+#      20: reg_dtm:DESC
+#      # 최신순 오름차순 - 해당 사이트는 등록일 기준(사이트 별 수정 가능)
+#      21: reg_dtm:ASC
+#    idx_08_menus:
+#      # 정확도 내림차순 (메뉴 검색은 title 필드만 대상이라 정확도 정렬만 사용)
+#      10: _score:DESC
+#      # 최신순 내림차순 - 해당 사이트에서는 조직정보의 최신순 내림차순의 정의가 없기 때문에 정확도로 고정(사이트 별 수정 가능, 입사일 등으로 수정 가능)
+#      20: _score:DESC
+#      # 최신순 오름차순 - 해당 사이트에서는 조직정보의 최신순 오름차순의 정의가 없기 때문에 정확도로 고정(사이트 별 수정 가능, 입사일 등으로 수정 가능)
+#      21: _score:DESC
+    idx_auto:
+      # 정확도 내림차순
+      10: _score:DESC
+      # 해당 기능없음, 정확도와 동일하게 제공. 고객이 원한다면 필드변경 가능
+      20: _score:DESC
+      # 해당 기능없음, 정확도와 동일하게 제공. 고객이 원한다면 필드변경 가능
+      21: _score:DESC
+#    idx_09_menus:
+#      # 정확도 내림차순 (메뉴 검색은 title 필드만 대상이라 정확도 정렬만 사용)
+#      10: _score:DESC
+#      20: _score:DESC
+#      21: _score:DESC
+    # [우장각 커스텀] 10=정확도순, 20/21=최신순(작성일=modDate 기준), 30/31=가나다순(title).
+    # 40(조회수순)/50(추천순)은 우장각 스키마에 해당 필드가 없어 정확도로 대체(향후 필드 추가 시 수정).
+    idx_wjg_documents1:
+      10: _score:DESC
+      20: modDate:DESC
+      21: modDate:ASC
+      30: title.keyword:ASC
+      31: title.keyword:DESC
+      40: _score:DESC
+      41: _score:DESC
+      50: _score:DESC
+      51: _score:DESC
+    idx_wjg_documents2:
+      10: _score:DESC
+      20: modDate:DESC
+      21: modDate:ASC
+      30: title.keyword:ASC
+      31: title.keyword:DESC
+      40: _score:DESC
+      41: _score:DESC
+      50: _score:DESC
+      51: _score:DESC
+    idx_wjg_documents3:
+      10: _score:DESC
+      20: modDate:DESC
+      21: modDate:ASC
+      30: title.keyword:ASC
+      31: title.keyword:DESC
+      40: _score:DESC
+      41: _score:DESC
+      50: _score:DESC
+      51: _score:DESC
+    idx_wjg_documents4:
+      10: _score:DESC
+      20: modDate:DESC
+      21: modDate:ASC
+      30: title.keyword:ASC
+      31: title.keyword:DESC
+      40: _score:DESC
+      41: _score:DESC
+      50: _score:DESC
+      51: _score:DESC
+  # 첨부파일 확장자 조건 - 상세검색에서 사용되며, ATTACHED99의 경우 기타(ATTACHED01~ATTACHED06 을 제외한 대상 조건검색하기 위한 필드)
+  attached:
+    ATTACHED99: hwp,hwpx,doc,docx,hwdt,ppt,pptx,show,xls,xlsx,cell,pdf,txt
+    ATTACHED01: hwp,hwpx
+    ATTACHED02: doc,docx,hwdt
+    ATTACHED03: ppt,pptx,show
+    ATTACHED04: xls,xlsx,cell
+    ATTACHED05: pdf
+    ATTACHED06: txt
+
+  # 어그리게이션 결과 수 최대 카운트
+  aggs-max-count: 1000
+  
+  # 어그리게이션 정보 : 인덱스별로 사용한 어그리게이션의 필드, 필드명, 정렬 정보를 지정(field, name, sort는 각 값들의 갯수가 같아야 한다.)
+  aggs:
+#    idx_02_boards:
+#      field: reg_year,attach_info.attach_ext
+#      name: 년도,확장자
+#      sort: _key:desc,_key:asc
+#    idx_02_document:
+#      field: reg_year,attach_info.attach_ext
+#      name: 년도,확장자
+#      sort: _key:desc,_key:asc
+#    #어그리게이션 없음, 생긴다면 아래필드 활용
+#    idx_08_menus:
+#      field:
+#      name:
+#      sort:
+    #어그리게이션 없음, 생긴다면 아래필드 활용
+    idx_auto:
+      field:
+      name:
+      sort:
+    # [우장각 커스텀] 사이드바 파셋: 표준폴더 분류 / 프로젝트 연도 / 표준폴더(4단계, 구 "폴더경로(3단계)")
+    # [4차 리뷰 반영] pathLv3(3단계) → pathLv4(4단계)로 변경 — 색인 시점에 path 를 앞 4단계까지만
+    # 잘라 저장해 둔 keyword 필드다(SampleDataLoader.truncatePathLevels() 참고).
+    # 예: "우장각>프로젝트>표준폴더>2023년" ("프로젝트"와 연도 사이에 "표준폴더" 고정 폴더 1단계가 더 들어감).
+    # 이 field/name/sort 목록에 이름만 추가하면, 기존 StandardSearchServiceImpl.getAggsOptionMap()이
+    # 그대로 읽어서 terms 집계를 걸어주므로 Java 코드는 따로 안 건드려도 된다.
+    # ※ 매핑이 바뀐 필드라 기존에 이미 떠 있는 인덱스에는 적용되지 않는다 — POST /api/index/recreate
+    #   로 인덱스를 재생성하고 POST /api/index/sample 로 샘플 데이터를 다시 적재해야 한다.
+    idx_wjg_documents1:
+      field: standardFolder,projectYear,pathLv4
+      name: 표준폴더분류,연도,표준폴더
+      sort: _key:asc,_key:desc,_key:asc
+    idx_wjg_documents2:
+      field: standardFolder,projectYear,pathLv4
+      name: 표준폴더분류,연도,표준폴더
+      sort: _key:asc,_key:desc,_key:asc
+    idx_wjg_documents3:
+      field: standardFolder,projectYear,pathLv4
+      name: 표준폴더분류,연도,표준폴더
+      sort: _key:asc,_key:desc,_key:asc
+    idx_wjg_documents4:
+      field: standardFolder,projectYear,pathLv4
+      name: 표준폴더분류,연도,표준폴더
+      sort: _key:asc,_key:desc,_key:asc
+  # 권한 조건 사용 인덱스
+  #acl-indices: idx_02_eapproval,idx_02_boards,idx_02_document
+  acl-indices: 
+  # 검색조건 필드 : date, ext는 상세검색 시 사용되며, acl_01,acl_02는 권한조건 추가 시 사용된다.
+  condition:
+#    idx_02_boards:
+#      dateyn: Y
+#      date: reg_dtm
+#      extyn: Y
+#      ext: attach_info.attach_ext
+#      acl01yn: N
+#      acl01:
+#      acl02yn: N
+#      acl02:
+#    idx_02_document:
+#      dateyn: Y
+#      date: reg_dtm
+#      extyn: Y
+#      ext: attach_info.attach_ext
+#      acl01yn: N
+#      acl01:
+#      acl02yn: N
+#      acl02:
+#    idx_03_people:
+#      dateyn: N
+#      date:
+#      extyn: N
+#      ext:
+#      acl01yn: N
+#      acl01:
+#      acl02yn: N
+#      acl02:
+    # [우장각 커스텀] 기간은 modDate(작성일=최근 수정일) 기준 range 필터.
+    # 파일형식(이미지/캐드 등 8종)은 고정 ATTACHED01~06 체계로 못 담아 filterOption.fileType(terms) 로 대체 처리 -> extyn: N
+    idx_wjg_documents1:
+      dateyn: Y
+      date: modDate
+      extyn: N
+      ext: 
+      acl01yn: N
+      acl01: 
+      acl02yn: N
+      acl02:
+    idx_wjg_documents2:
+      dateyn: Y
+      date: modDate
+      extyn: N
+      ext:
+      acl01yn: N
+      acl01:
+      acl02yn: N
+      acl02:
+    idx_wjg_documents3:
+      dateyn: Y
+      date: modDate
+      extyn: N
+      ext:
+      acl01yn: N
+      acl01:
+      acl02yn: N
+      acl02:
+    idx_wjg_documents4:
+      dateyn: Y
+      date: modDate
+      extyn: N
+      ext:
+      acl01yn: N
+      acl01:
+      acl02yn: N
+      acl02:
+    idx_auto:
+      dateyn: N
+      date: 
+      extyn: N
+      ext: 
+      acl01yn: N
+      acl01: 
+      acl02yn: N
+      acl02:   
+  # 검색어 옵션 : 
+  query-option:
+    type: best_fields
+    operator: and
+  query-phrase-option:
+    type: phrase
+    boost: 2
+    slop: 3
+  # 레인지 검색 옵션 : 현재 날짜 포맷만 존재함(gte, lte는 고정으로 사용)
+  range-option:
+    dateformat: strict_date_optional_time
+  # 본문(첨부추출)내용 제한 사이즈
+  content-max-size: 400
+  # 인기검색어 스케줄러  - all: 전체, db: db에서만 조회, es: 검색엔진에서만 조회
+  popular:
+    scheduler-use: N
+    scheduler-type: all
+    # "0 0 1,13 * * ?" -> 새벽 1시 , 오후 1시 수행
+    scheduler-cron: "0 * * * * ?"
+    es:
+      index: "/search-logs-*/_search"
+      agg-name: top_keywords
+      agg-field: keyword.keyword
+      search-field: action.keyword
+      search-value: SEARCH
+      order-key: _count
+      order-value: desc
+      timezone: Asia/Seoul
+      date-format: "yyyy-MM-dd'T'HH:mm:ss"
+      range-field: timestamp
+      size: 10
+      period: 7
+    db:
+      size: 10
+      period: 7

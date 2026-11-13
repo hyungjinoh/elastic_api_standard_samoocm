@@ -1,0 +1,463 @@
+[INFO ] 2026-11-13 17:55:54.692 [restartedMain] [BootstrapSpringApplicationListener:34] - Found Environment: org.springframework.boot.web.context.servlet.ApplicationServletEnvironment
+[INFO ] 2026-11-13 17:55:54.736 [restartedMain] [ElasticApiStandardApplication:54] - Starting ElasticApiStandardApplication using Java 17.0.20.1 with PID 3168 (C:\workspace\source_code\elastic_api_standard_samoocm\target\classes started by cmuser in C:\workspace\source_code\elastic_api_standard_samoocm)
+[DEBUG] 2026-11-13 17:55:54.737 [restartedMain] [ElasticApiStandardApplication:55] - Running with Spring Boot v4.1.1, Spring v7.0.9
+[INFO ] 2026-11-13 17:55:54.737 [restartedMain] [ElasticApiStandardApplication:658] - The following 1 profile is active: "local"
+[INFO ] 2026-11-13 17:55:54.764 [restartedMain] [DevToolsPropertyDefaultsPostProcessor:69] - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+[INFO ] 2026-11-13 17:55:54.764 [restartedMain] [DevToolsPropertyDefaultsPostProcessor:69] - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+[INFO ] 2026-11-13 17:55:54.983 [background-preinit] [Version:18] - HV000001: Hibernate Validator 9.1.3.Final
+[INFO ] 2026-11-13 17:55:55.454 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:95] - Post-processing PropertySource instances
+[INFO ] 2026-11-13 17:55:55.454 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+[INFO ] 2026-11-13 17:55:55.455 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:55:55.455 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:55:55.455 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemEnvironment [org.springframework.boot.support.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application-local.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.456 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource applicationInfo [org.springframework.boot.ApplicationInfoPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.457 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:85] - Re-initializing EncryptableSystemEnvironmentPropertySourceWrapper map delegation
+[INFO ] 2026-11-13 17:55:55.457 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:34] - Attempting to bootstrap EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:55:55.457 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:36] - EncryptableSystemEnvironmentPropertySourceWrapper found! Bootstrapping...
+[INFO ] 2026-11-13 17:55:55.457 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:87] - EncryptableSystemEnvironmentPropertySourceWrapper map delegation re-initialized
+[INFO ] 2026-11-13 17:55:55.457 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:56] - Re-initializing Logging System
+[INFO ] 2026-11-13 17:55:55.459 [restartedMain] [DefaultLazyPropertyFilter:45] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+[INFO ] 2026-11-13 17:55:55.467 [restartedMain] [DefaultLazyPropertyResolver:46] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+[INFO ] 2026-11-13 17:55:55.469 [restartedMain] [DefaultLazyPropertyDetector:44] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+[INFO ] 2026-11-13 17:55:55.480 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:75] - Logging System re-initialized by LoggingApplicationListener
+[INFO ] 2026-11-13 17:55:55.680 [restartedMain] [TomcatWebServer:114] - Tomcat initialized with port 8002 (http)
+[INFO ] 2026-11-13 17:55:55.688 [restartedMain] [Http11NioProtocol:168] - Initializing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:55:55.690 [restartedMain] [StandardService:168] - Starting service [Tomcat]
+[INFO ] 2026-11-13 17:55:55.690 [restartedMain] [StandardEngine:168] - Starting Servlet engine: [Apache Tomcat/11.0.24]
+[INFO ] 2026-11-13 17:55:55.730 [restartedMain] [WebApplicationContextInitializer:77] - Root WebApplicationContext: initialization completed in 966 ms
+[WARN ] 2026-11-13 17:55:55.910 [restartedMain] [WebConfig:214] - =================================================================
+[WARN ] 2026-11-13 17:55:55.910 [restartedMain] [WebConfig:215] -  webclient.ssl.trust-self-signed=true 로 인증서 검증을 우회합니다.
+[WARN ] 2026-11-13 17:55:55.910 [restartedMain] [WebConfig:216] -  이 설정은 자체서명 인증서를 쓰는 폐쇄망 등 예외적인 상황에서만 사용해야 하며,
+[WARN ] 2026-11-13 17:55:55.910 [restartedMain] [WebConfig:217] -  외부에 노출되는 환경에서는 절대 사용하면 안 됩니다.
+[WARN ] 2026-11-13 17:55:55.910 [restartedMain] [WebConfig:218] - =================================================================
+[WARN ] 2026-11-13 17:55:56.193 [restartedMain] [ElasticsearchConfig:138] - [ES-SSL] self-signed 인증서 검증을 우회합니다. 개발 환경에서만 사용하세요.
+[INFO ] 2026-11-13 17:55:56.801 [restartedMain] [Http11NioProtocol:168] - Starting ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:55:56.809 [restartedMain] [TomcatWebServer:240] - Tomcat started on port 8002 (http) with context path '/'
+[INFO ] 2026-11-13 17:55:56.815 [restartedMain] [ElasticApiStandardApplication:60] - Started ElasticApiStandardApplication in 2.409 seconds (process running for 2.928)
+[WARN ] 2026-11-13 17:55:56.817 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+[WARN ] 2026-11-13 17:55:56.817 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO ] 2026-11-13 17:56:19.473 [File Watcher] [LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener:216] - Restarting due to 103 class path changes (0 additions, 98 deletions, 5 modifications)
+[INFO ] 2026-11-13 17:56:19.475 [Thread-1] [GracefulShutdown:54] - Commencing graceful shutdown. Waiting for active requests to complete
+[INFO ] 2026-11-13 17:56:19.476 [tomcat-shutdown] [Http11NioProtocol:168] - Pausing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:19.507 [tomcat-shutdown] [GracefulShutdown:76] - Graceful shutdown complete
+[INFO ] 2026-11-13 17:56:19.507 [Thread-1] [Http11NioProtocol:168] - Stopping ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:19.566 [restartedMain] [BootstrapSpringApplicationListener:34] - Found Environment: org.springframework.boot.web.context.servlet.ApplicationServletEnvironment
+[INFO ] 2026-11-13 17:56:19.568 [restartedMain] [ElasticApiStandardApplication:54] - Starting ElasticApiStandardApplication using Java 17.0.20.1 with PID 3168 (C:\workspace\source_code\elastic_api_standard_samoocm\target\classes started by cmuser in C:\workspace\source_code\elastic_api_standard_samoocm)
+[DEBUG] 2026-11-13 17:56:19.568 [restartedMain] [ElasticApiStandardApplication:55] - Running with Spring Boot v4.1.1, Spring v7.0.9
+[INFO ] 2026-11-13 17:56:19.568 [restartedMain] [ElasticApiStandardApplication:658] - The following 1 profile is active: "local"
+[WARN ] 2026-11-13 17:56:19.724 [restartedMain] [ClassPathMapperScanner:71] - No MyBatis mapper was found in '[com.rayful.elastic.api]' package. Please check your configuration.
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:95] - Post-processing PropertySource instances
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemEnvironment [org.springframework.boot.support.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application-local.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.735 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource applicationInfo [org.springframework.boot.ApplicationInfoPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:85] - Re-initializing EncryptableSystemEnvironmentPropertySourceWrapper map delegation
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:34] - Attempting to bootstrap EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:36] - EncryptableSystemEnvironmentPropertySourceWrapper found! Bootstrapping...
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:87] - EncryptableSystemEnvironmentPropertySourceWrapper map delegation re-initialized
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:56] - Re-initializing Logging System
+[INFO ] 2026-11-13 17:56:19.736 [restartedMain] [DefaultLazyPropertyFilter:45] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+[INFO ] 2026-11-13 17:56:19.738 [restartedMain] [DefaultLazyPropertyResolver:46] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+[INFO ] 2026-11-13 17:56:19.738 [restartedMain] [DefaultLazyPropertyDetector:44] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+[INFO ] 2026-11-13 17:56:19.747 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:75] - Logging System re-initialized by LoggingApplicationListener
+[INFO ] 2026-11-13 17:56:19.787 [restartedMain] [TomcatWebServer:114] - Tomcat initialized with port 8002 (http)
+[INFO ] 2026-11-13 17:56:19.788 [restartedMain] [Http11NioProtocol:168] - Initializing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:19.788 [restartedMain] [StandardService:168] - Starting service [Tomcat]
+[INFO ] 2026-11-13 17:56:19.788 [restartedMain] [StandardEngine:168] - Starting Servlet engine: [Apache Tomcat/11.0.24]
+[INFO ] 2026-11-13 17:56:19.812 [restartedMain] [WebApplicationContextInitializer:77] - Root WebApplicationContext: initialization completed in 243 ms
+[INFO ] 2026-11-13 17:56:19.918 [restartedMain] [Http11NioProtocol:168] - Starting ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:19.921 [restartedMain] [TomcatWebServer:240] - Tomcat started on port 8002 (http) with context path '/'
+[INFO ] 2026-11-13 17:56:19.923 [restartedMain] [ElasticApiStandardApplication:60] - Started ElasticApiStandardApplication in 0.381 seconds (process running for 26.036)
+[WARN ] 2026-11-13 17:56:19.924 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+[WARN ] 2026-11-13 17:56:19.924 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO ] 2026-11-13 17:56:19.926 [restartedMain] [ConditionEvaluationDeltaLoggingListener:61] - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   DataSourceAutoConfiguration.PooledDataSourceConfiguration matched:
+      - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'spring.datasource.type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
+      - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   DataSourceAutoConfiguration.PooledDataSourceConfiguration#jdbcConnectionDetails matched:
+      - @ConditionalOnMissingBean (types: org.springframework.boot.jdbc.autoconfigure.JdbcConnectionDetails; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   DataSourceInitializationAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
+      - SQL InitializationDatabase Initialization default value is EMBEDDED (OnSqlInitializationCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'dataSource'; @ConditionalOnMissingBean (types: org.springframework.boot.sql.autoconfigure.init.ApplicationScriptDatabaseInitializer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration matched:
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'dataSource' (OnBeanCondition)
+
+   DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration#transactionManager matched:
+      - @ConditionalOnMissingBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   DevToolsDataSourceAutoConfiguration matched:
+      - @ConditionalOnClass found required class 'javax.sql.DataSource' (OnClassCondition)
+      - Devtools devtools enabled. (OnEnabledDevToolsCondition)
+      - DevTools DataSource Condition found auto-configured DataSource (DevToolsDataSourceAutoConfiguration.DevToolsDataSourceCondition)
+
+   JdbcClientAutoConfiguration matched:
+      - @ConditionalOnSingleCandidate (types: org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate; SearchStrategy: all) found a single bean 'namedParameterJdbcTemplate'; @ConditionalOnMissingBean (types: org.springframework.jdbc.core.simple.JdbcClient; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JdbcTemplateAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'dataSource' (OnBeanCondition)
+
+   JdbcTemplateConfiguration matched:
+      - @ConditionalOnMissingBean (types: org.springframework.jdbc.core.JdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MybatisAutoConfiguration matched:
+      - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
+      - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found a single bean 'dataSource' (OnBeanCondition)
+
+   MybatisAutoConfiguration#sqlSessionFactory matched:
+      - @ConditionalOnMissingBean (types: org.apache.ibatis.session.SqlSessionFactory; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MybatisAutoConfiguration#sqlSessionTemplate matched:
+      - @ConditionalOnMissingBean (types: org.mybatis.spring.SqlSessionTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   NamedParameterJdbcTemplateConfiguration matched:
+      - @ConditionalOnSingleCandidate (types: org.springframework.jdbc.core.JdbcTemplate; SearchStrategy: all) found a single bean 'jdbcTemplate'; @ConditionalOnMissingBean (types: org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TaskExecutorConfigurations.AsyncConfigurerConfiguration matched:
+      - @ConditionalOnMissingBean (types: org.springframework.scheduling.annotation.AsyncConfigurer; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration matched:
+      - AnyNestedCondition 1 matched 1 did not; NestedCondition on TaskExecutorConfigurations.OnExecutorCondition.ModelCondition @ConditionalOnProperty (spring.task.execution.mode=force) did not find property 'spring.task.execution.mode'; NestedCondition on TaskExecutorConfigurations.OnExecutorCondition.ExecutorBeanCondition @ConditionalOnMissingBean (types: java.util.concurrent.Executor; SearchStrategy: all) did not find any beans (TaskExecutorConfigurations.OnExecutorCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration#applicationTaskExecutor matched:
+      - @ConditionalOnThreading found PLATFORM (OnThreadingCondition)
+
+   TransactionAutoConfiguration.EnableTransactionManagementConfiguration matched:
+      - @ConditionalOnBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) found bean 'transactionManager'; @ConditionalOnMissingBean (types: org.springframework.transaction.annotation.AbstractTransactionManagementConfiguration; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   TransactionAutoConfiguration.EnableTransactionManagementConfiguration.CglibAutoProxyConfiguration matched:
+      - @ConditionalOnBooleanProperty (spring.aop.proxy-target-class=true) matched (OnPropertyCondition)
+
+   TransactionAutoConfiguration.TransactionTemplateConfiguration matched:
+      - @ConditionalOnSingleCandidate (types: org.springframework.transaction.PlatformTransactionManager; SearchStrategy: all) found a single bean 'transactionManager' (OnBeanCondition)
+
+   TransactionAutoConfiguration.TransactionTemplateConfiguration#transactionTemplate matched:
+      - @ConditionalOnMissingBean (types: org.springframework.transaction.support.TransactionOperations; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Negative matches:
+-----------------
+
+   MultipleOpenApiSupportConfiguration:
+      Did not match:
+         - AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 3 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnListGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.models.GroupedOpenApi; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.models.GroupedOpenApi (MultipleOpenApiSupportCondition)
+      Matched:
+         - found 'session' scope (OnWebApplicationCondition)
+         - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+
+   MultipleOpenApiSupportConfiguration.SpringDocWebMvcActuatorDifferentConfiguration:
+      Did not match:
+         - Ancestor org.springdoc.webmvc.core.configuration.MultipleOpenApiSupportConfiguration did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.boot.webmvc.actuate.endpoint.web.WebMvcEndpointHandlerMapping' (OnClassCondition)
+
+   MybatisAutoConfiguration.MapperScannerRegistrarNotFoundConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (types: org.mybatis.spring.mapper.MapperFactoryBean,org.mybatis.spring.mapper.MapperScannerConfigurer; SearchStrategy: all) found beans of type 'org.mybatis.spring.mapper.MapperScannerConfigurer' com.rayful.elastic.api.ElasticApiStandardApplication#MapperScannerRegistrar#0 (OnBeanCondition)
+
+   SpringDocConfiguration#springdocBeanFactoryPostProcessor:
+      Did not match:
+         - AnyNestedCondition 0 matched 2 did not; NestedCondition on CacheOrGroupedOpenApiCondition.OnCacheDisabled found non-matching nested conditions @ConditionalOnProperty (springdoc.cache.disabled) did not find property 'springdoc.cache.disabled'; NestedCondition on CacheOrGroupedOpenApiCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 2 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 0 matched 3 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnListGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.models.GroupedOpenApi; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) did not find any beans of type org.springdoc.core.models.GroupedOpenApi (CacheOrGroupedOpenApiCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.boot.context.properties.bind.BindResult' (OnClassCondition)
+
+   TaskExecutorConfigurations.AsyncConfigurerWrapperConfiguration:
+      Did not match:
+         - @ConditionalOnBean (types: org.springframework.scheduling.annotation.AsyncConfigurer; SearchStrategy: all) did not find any beans of type org.springframework.scheduling.annotation.AsyncConfigurer (OnBeanCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration#applicationTaskExecutorVirtualThreads:
+      Did not match:
+         - @ConditionalOnThreading did not find VIRTUAL (OnThreadingCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+[INFO ] 2026-11-13 17:56:28.989 [File Watcher] [LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener:216] - Restarting due to 82 class path changes (82 additions, 0 deletions, 0 modifications)
+[INFO ] 2026-11-13 17:56:28.990 [Thread-5] [GracefulShutdown:54] - Commencing graceful shutdown. Waiting for active requests to complete
+[INFO ] 2026-11-13 17:56:28.991 [tomcat-shutdown] [Http11NioProtocol:168] - Pausing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:29.022 [tomcat-shutdown] [GracefulShutdown:76] - Graceful shutdown complete
+[INFO ] 2026-11-13 17:56:29.023 [Thread-5] [Http11NioProtocol:168] - Stopping ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:29.084 [restartedMain] [BootstrapSpringApplicationListener:34] - Found Environment: org.springframework.boot.web.context.servlet.ApplicationServletEnvironment
+[INFO ] 2026-11-13 17:56:29.086 [restartedMain] [ElasticApiStandardApplication:54] - Starting ElasticApiStandardApplication using Java 17.0.20.1 with PID 3168 (C:\workspace\source_code\elastic_api_standard_samoocm\target\classes started by cmuser in C:\workspace\source_code\elastic_api_standard_samoocm)
+[DEBUG] 2026-11-13 17:56:29.086 [restartedMain] [ElasticApiStandardApplication:55] - Running with Spring Boot v4.1.1, Spring v7.0.9
+[INFO ] 2026-11-13 17:56:29.086 [restartedMain] [ElasticApiStandardApplication:658] - The following 1 profile is active: "local"
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:95] - Post-processing PropertySource instances
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemEnvironment [org.springframework.boot.support.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application-local.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource applicationInfo [org.springframework.boot.ApplicationInfoPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:85] - Re-initializing EncryptableSystemEnvironmentPropertySourceWrapper map delegation
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:34] - Attempting to bootstrap EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:36] - EncryptableSystemEnvironmentPropertySourceWrapper found! Bootstrapping...
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:87] - EncryptableSystemEnvironmentPropertySourceWrapper map delegation re-initialized
+[INFO ] 2026-11-13 17:56:29.341 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:56] - Re-initializing Logging System
+[INFO ] 2026-11-13 17:56:29.342 [restartedMain] [DefaultLazyPropertyFilter:45] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+[INFO ] 2026-11-13 17:56:29.343 [restartedMain] [DefaultLazyPropertyResolver:46] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+[INFO ] 2026-11-13 17:56:29.343 [restartedMain] [DefaultLazyPropertyDetector:44] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+[INFO ] 2026-11-13 17:56:29.350 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:75] - Logging System re-initialized by LoggingApplicationListener
+[INFO ] 2026-11-13 17:56:29.375 [restartedMain] [TomcatWebServer:114] - Tomcat initialized with port 8002 (http)
+[INFO ] 2026-11-13 17:56:29.375 [restartedMain] [Http11NioProtocol:168] - Initializing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:29.376 [restartedMain] [StandardService:168] - Starting service [Tomcat]
+[INFO ] 2026-11-13 17:56:29.376 [restartedMain] [StandardEngine:168] - Starting Servlet engine: [Apache Tomcat/11.0.24]
+[INFO ] 2026-11-13 17:56:29.394 [restartedMain] [WebApplicationContextInitializer:77] - Root WebApplicationContext: initialization completed in 306 ms
+[WARN ] 2026-11-13 17:56:29.432 [restartedMain] [WebConfig:214] - =================================================================
+[WARN ] 2026-11-13 17:56:29.433 [restartedMain] [WebConfig:215] -  webclient.ssl.trust-self-signed=true 로 인증서 검증을 우회합니다.
+[WARN ] 2026-11-13 17:56:29.433 [restartedMain] [WebConfig:216] -  이 설정은 자체서명 인증서를 쓰는 폐쇄망 등 예외적인 상황에서만 사용해야 하며,
+[WARN ] 2026-11-13 17:56:29.433 [restartedMain] [WebConfig:217] -  외부에 노출되는 환경에서는 절대 사용하면 안 됩니다.
+[WARN ] 2026-11-13 17:56:29.433 [restartedMain] [WebConfig:218] - =================================================================
+[WARN ] 2026-11-13 17:56:29.459 [restartedMain] [ElasticsearchConfig:138] - [ES-SSL] self-signed 인증서 검증을 우회합니다. 개발 환경에서만 사용하세요.
+[INFO ] 2026-11-13 17:56:29.535 [restartedMain] [Http11NioProtocol:168] - Starting ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:29.537 [restartedMain] [TomcatWebServer:240] - Tomcat started on port 8002 (http) with context path '/'
+[INFO ] 2026-11-13 17:56:29.539 [restartedMain] [ElasticApiStandardApplication:60] - Started ElasticApiStandardApplication in 0.475 seconds (process running for 35.652)
+[WARN ] 2026-11-13 17:56:29.539 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+[WARN ] 2026-11-13 17:56:29.539 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO ] 2026-11-13 17:56:29.540 [restartedMain] [ConditionEvaluationDeltaLoggingListener:61] - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+    None
+
+
+Negative matches:
+-----------------
+
+   AppScheduler:
+      Did not match:
+         - @ConditionalOnProperty (search.popular.scheduler-use=Y) found different value in property 'scheduler-use' (OnPropertyCondition)
+
+   DataSourceAutoConfiguration.PooledDataSourceConfiguration:
+      Did not match:
+         - @ConditionalOnMissingBean (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) found beans of type 'javax.sql.DataSource' autoKwdDataSource, samwoocmDataSource (OnBeanCondition)
+      Matched:
+         - AnyNestedCondition 1 matched 1 did not; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType @ConditionalOnProperty (spring.datasource.type) did not find property 'spring.datasource.type' (DataSourceAutoConfiguration.PooledDataSourceCondition)
+
+   DataSourceInitializationAutoConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found multiple beans 'samwoocmDataSource', 'autoKwdDataSource' (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'org.springframework.jdbc.datasource.init.DatabasePopulator' (OnClassCondition)
+         - SQL InitializationDatabase Initialization default value is EMBEDDED (OnSqlInitializationCondition)
+
+   DataSourceTransactionManagerAutoConfiguration.JdbcTransactionManagerConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found multiple beans 'samwoocmDataSource', 'autoKwdDataSource' (OnBeanCondition)
+
+   DevToolsDataSourceAutoConfiguration:
+      Did not match:
+         - DevTools DataSource Condition did not find a single DataSource bean (DevToolsDataSourceAutoConfiguration.DevToolsDataSourceCondition)
+      Matched:
+         - @ConditionalOnClass found required class 'javax.sql.DataSource' (OnClassCondition)
+         - Devtools devtools enabled. (OnEnabledDevToolsCondition)
+
+   JdbcClientAutoConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   JdbcTemplateAutoConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found multiple beans 'samwoocmDataSource', 'autoKwdDataSource' (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required classes 'javax.sql.DataSource', 'org.springframework.jdbc.core.JdbcTemplate' (OnClassCondition)
+
+   MybatisAutoConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: javax.sql.DataSource; SearchStrategy: all) found multiple beans 'samwoocmDataSource', 'autoKwdDataSource' (OnBeanCondition)
+      Matched:
+         - @ConditionalOnClass found required classes 'org.apache.ibatis.session.SqlSessionFactory', 'org.mybatis.spring.SqlSessionFactoryBean' (OnClassCondition)
+
+   TaskExecutorConfigurations.TaskExecutorConfiguration:
+      Did not match:
+         - AnyNestedCondition 0 matched 2 did not; NestedCondition on TaskExecutorConfigurations.OnExecutorCondition.ModelCondition @ConditionalOnProperty (spring.task.execution.mode=force) did not find property 'spring.task.execution.mode'; NestedCondition on TaskExecutorConfigurations.OnExecutorCondition.ExecutorBeanCondition @ConditionalOnMissingBean (types: java.util.concurrent.Executor; SearchStrategy: all) found beans of type 'java.util.concurrent.Executor' asyncExecutor (TaskExecutorConfigurations.OnExecutorCondition)
+
+   TransactionAutoConfiguration.EnableTransactionManagementConfiguration:
+      Did not match:
+         - @ConditionalOnBean (types: org.springframework.transaction.TransactionManager; SearchStrategy: all) did not find any beans of type org.springframework.transaction.TransactionManager (OnBeanCondition)
+
+   TransactionAutoConfiguration.EnableTransactionManagementConfiguration.CglibAutoProxyConfiguration:
+      Did not match:
+         - Ancestor org.springframework.boot.transaction.autoconfigure.TransactionAutoConfiguration$EnableTransactionManagementConfiguration did not match (ConditionEvaluationReport.AncestorsMatchedCondition)
+      Matched:
+         - @ConditionalOnBooleanProperty (spring.aop.proxy-target-class=true) matched (OnPropertyCondition)
+
+   TransactionAutoConfiguration.TransactionTemplateConfiguration:
+      Did not match:
+         - @ConditionalOnSingleCandidate (types: org.springframework.transaction.PlatformTransactionManager; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+[INFO ] 2026-11-13 17:56:31.013 [File Watcher] [LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener:216] - Restarting due to 16 class path changes (16 additions, 0 deletions, 0 modifications)
+[INFO ] 2026-11-13 17:56:31.014 [Thread-9] [GracefulShutdown:54] - Commencing graceful shutdown. Waiting for active requests to complete
+[INFO ] 2026-11-13 17:56:31.014 [tomcat-shutdown] [Http11NioProtocol:168] - Pausing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:31.043 [tomcat-shutdown] [GracefulShutdown:76] - Graceful shutdown complete
+[INFO ] 2026-11-13 17:56:31.044 [Thread-9] [Http11NioProtocol:168] - Stopping ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:31.105 [restartedMain] [BootstrapSpringApplicationListener:34] - Found Environment: org.springframework.boot.web.context.servlet.ApplicationServletEnvironment
+[INFO ] 2026-11-13 17:56:31.106 [restartedMain] [ElasticApiStandardApplication:54] - Starting ElasticApiStandardApplication using Java 17.0.20.1 with PID 3168 (C:\workspace\source_code\elastic_api_standard_samoocm\target\classes started by cmuser in C:\workspace\source_code\elastic_api_standard_samoocm)
+[DEBUG] 2026-11-13 17:56:31.106 [restartedMain] [ElasticApiStandardApplication:55] - Running with Spring Boot v4.1.1, Spring v7.0.9
+[INFO ] 2026-11-13 17:56:31.106 [restartedMain] [ElasticApiStandardApplication:658] - The following 1 profile is active: "local"
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:95] - Post-processing PropertySource instances
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource configurationProperties [class org.springframework.boot.context.properties.source.ConfigurationPropertySourcesPropertySource
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletConfigInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:105] - Skipping PropertySource servletContextInitParams [class org.springframework.core.env.PropertySource$StubPropertySource
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemProperties [org.springframework.core.env.PropertiesPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource systemEnvironment [org.springframework.boot.support.SystemEnvironmentPropertySourceEnvironmentPostProcessor$OriginAwareSystemEnvironmentPropertySource] to EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource random [org.springframework.boot.env.RandomValuePropertySource] to EncryptablePropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.278 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application-local.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource Config resource 'class path resource [application.yml]' via location 'optional:classpath:/' [org.springframework.boot.env.OriginTrackedMapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource devtools [org.springframework.core.env.MapPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EncryptablePropertySourceConverter:110] - Converting PropertySource applicationInfo [org.springframework.boot.ApplicationInfoPropertySource] to EncryptableMapPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:85] - Re-initializing EncryptableSystemEnvironmentPropertySourceWrapper map delegation
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:34] - Attempting to bootstrap EncryptableSystemEnvironmentPropertySourceWrapper
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EncryptableSystemEnvironmentPropertySourceWrapperGetSourceWrapperEnvironmentListener:36] - EncryptableSystemEnvironmentPropertySourceWrapper found! Bootstrapping...
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:87] - EncryptableSystemEnvironmentPropertySourceWrapper map delegation re-initialized
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:56] - Re-initializing Logging System
+[INFO ] 2026-11-13 17:56:31.279 [restartedMain] [DefaultLazyPropertyFilter:45] - Property Filter custom Bean not found with name 'encryptablePropertyFilter'. Initializing Default Property Filter
+[INFO ] 2026-11-13 17:56:31.280 [restartedMain] [DefaultLazyPropertyResolver:46] - Property Resolver custom Bean not found with name 'encryptablePropertyResolver'. Initializing Default Property Resolver
+[INFO ] 2026-11-13 17:56:31.280 [restartedMain] [DefaultLazyPropertyDetector:44] - Property Detector custom Bean not found with name 'encryptablePropertyDetector'. Initializing Default Property Detector
+[INFO ] 2026-11-13 17:56:31.287 [restartedMain] [EnableEncryptablePropertiesBeanFactoryPostProcessor:75] - Logging System re-initialized by LoggingApplicationListener
+[INFO ] 2026-11-13 17:56:31.312 [restartedMain] [TomcatWebServer:114] - Tomcat initialized with port 8002 (http)
+[INFO ] 2026-11-13 17:56:31.313 [restartedMain] [Http11NioProtocol:168] - Initializing ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:31.313 [restartedMain] [StandardService:168] - Starting service [Tomcat]
+[INFO ] 2026-11-13 17:56:31.313 [restartedMain] [StandardEngine:168] - Starting Servlet engine: [Apache Tomcat/11.0.24]
+[INFO ] 2026-11-13 17:56:31.333 [restartedMain] [WebApplicationContextInitializer:77] - Root WebApplicationContext: initialization completed in 226 ms
+[WARN ] 2026-11-13 17:56:31.366 [restartedMain] [WebConfig:214] - =================================================================
+[WARN ] 2026-11-13 17:56:31.366 [restartedMain] [WebConfig:215] -  webclient.ssl.trust-self-signed=true 로 인증서 검증을 우회합니다.
+[WARN ] 2026-11-13 17:56:31.366 [restartedMain] [WebConfig:216] -  이 설정은 자체서명 인증서를 쓰는 폐쇄망 등 예외적인 상황에서만 사용해야 하며,
+[WARN ] 2026-11-13 17:56:31.367 [restartedMain] [WebConfig:217] -  외부에 노출되는 환경에서는 절대 사용하면 안 됩니다.
+[WARN ] 2026-11-13 17:56:31.367 [restartedMain] [WebConfig:218] - =================================================================
+[WARN ] 2026-11-13 17:56:31.390 [restartedMain] [ElasticsearchConfig:138] - [ES-SSL] self-signed 인증서 검증을 우회합니다. 개발 환경에서만 사용하세요.
+[INFO ] 2026-11-13 17:56:31.470 [restartedMain] [Http11NioProtocol:168] - Starting ProtocolHandler ["http-nio-8002"]
+[INFO ] 2026-11-13 17:56:31.472 [restartedMain] [TomcatWebServer:240] - Tomcat started on port 8002 (http) with context path '/'
+[INFO ] 2026-11-13 17:56:31.474 [restartedMain] [ElasticApiStandardApplication:60] - Started ElasticApiStandardApplication in 0.388 seconds (process running for 37.587)
+[WARN ] 2026-11-13 17:56:31.474 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+[WARN ] 2026-11-13 17:56:31.474 [restartedMain] [SpringDocAppInitializer:83] - SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+[INFO ] 2026-11-13 17:56:31.475 [restartedMain] [ConditionEvaluationDeltaLoggingListener:61] - Condition evaluation delta:
+
+
+==========================
+CONDITION EVALUATION DELTA
+==========================
+
+
+Positive matches:
+-----------------
+
+   MultipleOpenApiSupportConfiguration matched:
+      - found 'session' scope (OnWebApplicationCondition)
+      - @ConditionalOnProperty (springdoc.api-docs.enabled) matched (OnPropertyCondition)
+      - AnyNestedCondition 1 matched 1 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 2 matched 1 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnListGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) found bean 'allApi'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) found bean 'allApi' (MultipleOpenApiSupportCondition)
+
+   MultipleOpenApiSupportConfiguration#multipleOpenApiResource matched:
+      - @ConditionalOnProperty (springdoc.use-management-port=false) matched (OnPropertyCondition)
+      - @ConditionalOnMissingBean (types: org.springdoc.webmvc.api.MultipleOpenApiWebMvcResource; SearchStrategy: all) did not find any beans (OnBeanCondition)
+
+   MultipleOpenApiSupportConfiguration.SpringDocWebMvcActuatorDifferentConfiguration matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.webmvc.actuate.endpoint.web.WebMvcEndpointHandlerMapping' (OnClassCondition)
+
+   SpringDocConfiguration#springdocBeanFactoryPostProcessor matched:
+      - @ConditionalOnClass found required class 'org.springframework.boot.context.properties.bind.BindResult' (OnClassCondition)
+      - AnyNestedCondition 1 matched 1 did not; NestedCondition on CacheOrGroupedOpenApiCondition.OnCacheDisabled found non-matching nested conditions @ConditionalOnProperty (springdoc.cache.disabled) did not find property 'springdoc.cache.disabled', @ConditionalOnMissingBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) found beans of type 'org.springdoc.core.models.GroupedOpenApi' allApi; NestedCondition on CacheOrGroupedOpenApiCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 1 matched 1 did not; NestedCondition on MultipleOpenApiSupportCondition.OnActuatorDifferentPort @ConditionalOnProperty (springdoc.show-actuator) did not find property 'springdoc.show-actuator'; NestedCondition on MultipleOpenApiSupportCondition.OnMultipleOpenApiSupportCondition AnyNestedCondition 2 matched 1 did not; NestedCondition on MultipleOpenApiGroupsCondition.OnListGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) found bean 'allApi'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupConfigProperty @ConditionalOnProperty (springdoc.group-configs[0].group) did not find property 'springdoc.group-configs[0].group'; NestedCondition on MultipleOpenApiGroupsCondition.OnGroupedOpenApiBean @ConditionalOnBean (types: org.springdoc.core.models.GroupedOpenApi; SearchStrategy: all) found bean 'allApi' (CacheOrGroupedOpenApiCondition)
+
+
+Negative matches:
+-----------------
+
+   MultipleOpenApiSupportConfiguration.SpringDocWebMvcActuatorDifferentConfiguration#multipleOpenApiActuatorResource:
+      Did not match:
+         - @ConditionalOnProperty (springdoc.use-management-port) did not find property 'springdoc.use-management-port' (OnPropertyCondition)
+
+
+Exclusions:
+-----------
+
+    None
+
+
+Unconditional classes:
+----------------------
+
+    None
+
+
+
+[INFO ] 2026-11-13 17:57:16.292 [http-nio-8002-exec-1] [[/]:168] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+[INFO ] 2026-11-13 17:57:16.292 [http-nio-8002-exec-1] [DispatcherServlet:523] - Initializing Servlet 'dispatcherServlet'
+[INFO ] 2026-11-13 17:57:16.293 [http-nio-8002-exec-1] [DispatcherServlet:545] - Completed initialization in 1 ms
+[INFO ] 2026-11-13 17:57:16.361 [http-nio-8002-exec-1] [StandardAutoController:67] - =======================
+[INFO ] 2026-11-13 17:57:16.361 [http-nio-8002-exec-1] [StandardAutoController:68] - AutoComplete URL: (POST) http://localhost:8002/api/auto, TraceId: AUTO_1113175716_419
+[INFO ] 2026-11-13 17:57:16.361 [http-nio-8002-exec-1] [StandardAutoController:69] - =======================
+[INFO ] 2026-11-13 17:57:16.365 [http-nio-8002-exec-1] [StandardAutoController:70] - [AUTO_1113175716_419] Param : RequestAutoParamVO [kwd=air, srchArea=null, collapseCd=90009, sort=10, size=0, page=0]
+[DEBUG] 2026-11-13 17:57:16.369 [http-nio-8002-exec-1] [ConfigValidator:61] - [AUTO_1113175716_419] Index Name : idx_auto
+[DEBUG] 2026-11-13 17:57:16.402 [http-nio-8002-exec-1] [StandardAutoServiceImpl:53] - [AUTO_1113175716_419] AutoCompleteUri : idx_auto/_search
+[DEBUG] 2026-11-13 17:57:16.402 [http-nio-8002-exec-1] [StandardAutoServiceImpl:54] - [AUTO_1113175716_419] Query : {"track_total_hits":true,"size":10,"from":0,"query":{"multi_match":{"query":"air","fields":["word"],"type":"best_fields","operator":"and"}},"sort":[{"_score":{"order":"DESC"}}],"highlight":{"number_of_fragments":5,"pre_tags":"\u003cem\u003e","post_tags":"\u003c/em\u003e","fields":{"word":{}},"fragment_size":300},"_source":{"includes":["word"]}}
+[DEBUG] 2026-11-13 17:57:16.438 [http-nio-8002-exec-1] [WebConfig:140] - Request: POST https://192.168.3.210:9200/idx_auto/_search
+[DEBUG] 2026-11-13 17:57:16.439 [http-nio-8002-exec-1] [WebConfig:142] - Header-> Content-Type : application/json
+[DEBUG] 2026-11-13 17:57:16.439 [http-nio-8002-exec-1] [WebConfig:142] - Header-> Authorization : Basic ZWxhc3RpYzplbGFzdGlj
+[DEBUG] 2026-11-13 17:57:16.740 [reactor-http-nio-2] [WebConfig:151] - Header-> X-elastic-product : Elasticsearch
+[DEBUG] 2026-11-13 17:57:16.740 [reactor-http-nio-2] [WebConfig:151] - Header-> content-type : application/json
+[DEBUG] 2026-11-13 17:57:16.740 [reactor-http-nio-2] [WebConfig:151] - Header-> Transfer-Encoding : chunked
+[DEBUG] 2026-11-13 17:57:16.755 [http-nio-8002-exec-1] [StandardAutoServiceImpl:59] - [AUTO_1113175716_419] AutoComplete : collapseCd=90009, keyword=air, took=0, totalCnt=0, result={took=2, timed_out=false, _shards={total=3, successful=3, skipped=0, failed=0}, hits={total={value=126, relation=eq}, max_score=18.709362, hits=[{_index=idx_auto1, _id=air, _score=18.709362, _source={word=air}, highlight={word=[<em>air</em>]}}, {_index=idx_auto1, _id=chair, _score=16.41048, _source={word=chair}, highlight={word=[ch<em>air</em>]}}, {_index=idx_auto1, _id=stair(s), _score=15.978376, _source={word=stair(s)}, highlight={word=[st<em>air</em>(s)]}}, {_index=idx_auto1, _id=air-vent, _score=15.708901, _source={word=air-vent}, highlight={word=[<em>air</em>-vent]}}, {_index=idx_auto1, _id=air jet, _score=15.4032135, _source={word=air jet}, highlight={word=[<em>air </em>jet]}}, {_index=idx_auto1, _id=air gap, _score=15.220706, _source={word=air gap}, highlight={word=[<em>air </em>gap]}}, {_index=idx_auto1, _id=repair, _score=15.220706, _source={word=repair}, highlight={word=[rep<em>air</em>]}}, {_index=idx_auto1, _id=air dry, _score=14.988918, _source={word=air dry}, highlight={word=[<em>air </em>dry]}}, {_index=idx_auto1, _id=air ramp, _score=14.512448, _source={word=air ramp}, highlight={word=[<em>air </em>ramp]}}, {_index=idx_auto1, _id=airport, _score=14.512448, _source={word=airport}, highlight={word=[<em>air</em>port]}}]}}
+[DEBUG] 2026-11-13 17:57:16.757 [http-nio-8002-exec-1] [CommonServiceImpl:760] - [AUTO_1113175716_419] Result : ApiAutoResultVO(apiResult={totalCnt=126, sectionSize=1, sectionMap={indexName=idx_auto, sectionName=자동완성, sectionCode=90009, sectionCnt=126, docList=[{word=air, word_highlight=<em>air</em>}, {word=chair, word_highlight=ch<em>air</em>}, {word=stair(s), word_highlight=st<em>air</em>(s)}, {word=air-vent, word_highlight=<em>air</em>-vent}, {word=air jet, word_highlight=<em>air </em>jet}, {word=air gap, word_highlight=<em>air </em>gap}, {word=repair, word_highlight=rep<em>air</em>}, {word=air dry, word_highlight=<em>air </em>dry}, {word=air ramp, word_highlight=<em>air </em>ramp}, {word=airport, word_highlight=<em>air</em>port}]}})
+[INFO ] 2026-11-13 17:57:16.757 [http-nio-8002-exec-1] [CommonServiceImpl:761] - [AUTO_1113175716_419] Result : [index:idx_auto, totalCnt:126, status:200]
+[INFO ] 2026-11-13 17:57:22.096 [SpringApplicationShutdownHook] [GracefulShutdown:54] - Commencing graceful shutdown. Waiting for active requests to complete
+[INFO ] 2026-11-13 17:57:22.127 [tomcat-shutdown] [GracefulShutdown:76] - Graceful shutdown complete

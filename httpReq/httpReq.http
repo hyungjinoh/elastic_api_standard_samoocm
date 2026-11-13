@@ -1,0 +1,104 @@
+
+
+### 자동완성 검색요청
+POST http://localhost:8002/api/auto
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "air",
+  "collapseCd": "90009",
+  "sort": "10",
+  "size": 0,
+  "page": 0
+}
+
+
+
+
+###
+###
+POST http://localhost:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "배치도",
+  "kwdOption": "",
+  "srchArea": [],
+  "reSrchYn": "",
+  "prevKwd": [],
+  "collapseCd": "90000",
+  "sort": "",
+  "regDtmYn": "",
+  "regStartDtm": "",
+  "regEndDtm": "",
+  "attachedType": [],
+  "size": 10,
+  "page": 1
+}
+
+### 프로젝트탭 검색
+POST http://localhost:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "공사",
+  "srchArea": [
+    "AREA01"
+  ],
+  "reSrchYn": "N",
+  "collapseCd": "90001",
+  "sort": "10",
+  "regDtmYn": "N",
+  "size": 20,
+  "page": 1,
+  "filterOption": {
+    "area": [
+      "PROJECT"
+    ],
+    "docType": {
+      "operator": "or",
+      "values": [
+        "FILE"
+      ]
+    },
+    "region": {
+      "operator": "or",
+      "values": [
+        "전라북도"
+      ]
+    }
+  }
+}
+
+
+### 프로젝트탭 검색
+POST http://localhost:8002/api/search
+Content-Type: application/json
+X-API-KEY: 5f275eb1149f3eafddc000c80406d861749eb2d2506fcbcd60743f902b0ed351
+
+{
+  "kwd": "공사",
+  "srchArea": [
+    "AREA01"
+  ],
+  "reSrchYn": "N",
+  "collapseCd": "90001",
+  "sort": "10",
+  "regDtmYn": "N",
+  "size": 20,
+  "page": 1,
+  "filterOption": {
+    "area": [
+      "PROJECT"
+    ],
+    "docType": {
+      "operator": "or",
+      "values": [
+        "FILE"
+      ]
+    }
+  }
+}

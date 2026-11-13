@@ -1,0 +1,107 @@
+ =============================================================================
+# elastic_api_standard - 앱 컨테이너 (공유 ES/Kibana 연동판)
+#
+# ES/Kibana 는 여기서 띄우지 않고, docker/ 폴더의 compose 가 띄운 것을 "공유"한다.
+# (elastic_bulker 와 elastic_api_standard 가 동일한 asset-net / es_asset 를 함께 사용)
+#
+# ── 실행 순서 ────────────────────────────────────────────────────────────────
+#   [1] ES/Kibana 기동 (최초 1회, 둘 중 한 프로젝트에서만):
+#         cd docker && docker compose up -d --build
+#       → 커스텀 ES(nori + starstory + 사전) 빌드, security+HTTPS, Kibana(5601) 기동.
+#         네트워크 asset-net / 컨테이너 es_asset, kibana_asset 생성.
+#   [2] WAR 빌드:   mvn -DskipTests clean package
+#   [3] 앱 기동:    cp .env.example .env && docker compose up -d --build
+#   [4] 검증:       curl http://localhost:8002/
+#
+# ※ ES 는 한 번만 띄우면 두 프로젝트가 공유한다. 이미 elastic_bulker 쪽에서 띄웠다면 [1] 은 생략.
+# =============================================================================
+#########################################################################
+name: wjg-search
+
+services:
+  elasticsearch:
+    build:
+      context: ./docker
+      dockerfile: elasticsearch.Dockerfile
+    container_name: wjg-elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=elastic1234
+      # 인증(auth)은 유지하되, HTTP TLS 는 사용하지 않음(테스트/개발용)
+      - xpack.security.enabled=true
+      - xpack.security.http.ssl.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    volumes:
+      - es-data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - asset-net
+    healthcheck:
+      # http + basic auth 로 확인 (인증서 불필요)
+      test: ["CMD-SHELL", "curl -s -u elastic:elastic1234 http://localhost:9200 >/dev/null || exit 1"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+
+  # ─── Kibana (선택사항 — 데이터 확인용) ─────────────────────
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.15.3
+    container_name: wjg-kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_SERVICEACCOUNTTOKEN=AAEAAWVsYXN0aWMva2liYW5hL2tpYmFuYS10b2tlbjotQUxobm1oRFE0cVczNlpLeFdFQ0hB
+    #      - xpack.security.enabled=false
+#      - ELASTICSEARCH_USERNAME=elastic
+#      - ELASTICSEARCH_PASSWORD=elastic1234
+    ports:
+      - "5601:5601"
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    networks:
+      - asset-net
+
+  wjg-search:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wjg-search-api
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      # http 로 접속 (TLS 미사용)
+      - ES_HOST=http://elasticsearch:9200
+      - ES_USERNAME=elastic
+      - ES_PASSWORD=elastic1234
+      - CORS_ALLOWED_ORIGINS=http://localhost:5173
+    ports:
+      - "8080:8080"
+    networks:
+      - asset-net
+
+  mariadb:
+    image: mariadb:11.4
+    container_name: search-mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: isearch
+      MARIADB_USER: isearch
+      MARIADB_PASSWORD: isearch
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - asset-net
+
+volumes:
+  mariadb-data:
+  es-data:
+
+networks:
+  default:
+  asset-net:
+    name: asset-net      # ← docker inspect 로 확인한 실제 이름

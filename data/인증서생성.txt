@@ -1,0 +1,35 @@
+*PKCS 형식의 인증서 생성
+
+    cd /app/ssl/sge
+    sudo openssl pkcs12 -export -in wooripms.woorifg.com.pem -inkey wooripms.woorifg.com.pem.key -certfile woorifg.com.root.pem.crt -name search-api -out search-api.p12
+
+    비번: wooripms534@
+
+    확인)
+    curl -k https://10.214.122.94:8002/api/license  결과나옴
+
+    curl -k http://10.214.122.94:8002/api/license
+    ==> Bad Request
+        This combination of host and port requires TLS.
+
+참고) 인증서에 실제로 들어간 이름 확인
+    openssl x509 -in /app/ssl/sge/wooripms.woorifg.com.pem -noout -subject -ext subjectAltName
+    ==> 4개 등록됨
+
+    subject=C=KR, O=woorifg, OU=eportal, CN=wooripms.woorifg.com
+    X509v3 Subject Alternative Name:
+    DNS:wooripms.woorifg.com, DNS:wooripms.woorifg.com, DNS:wpmsrp.woorifg.com, DNS:wooripmst.woorifg.com, DNS:wpmsrpt.woorifg.com
+
+인증서 파일들의 역할
+    search-api.p12   : 서버가 TLS 서비스에 쓰는 번들(배치엔 불필요)
+    woorifg.com.root.pem.crt   : 루트 CA인증서 <- 이게 신뢰 등록 대상
+    wooripms.woorifg.com.pem  : 서버(리프) 인증서
+    wooripms.woorifg.com.pem.key : 서버 개인키(배치엔 불필요)
+
+
+***********************************************
+엔드포인트 확인
+1. api/search   // 통합검색
+2. api/menu/search   //메뉴검색만 단독검색
+3. Api/search/section  //정렬토글 클릭
+4. api/recent/search  //최근검색어 조회
